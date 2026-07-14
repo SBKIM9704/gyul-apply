@@ -51,11 +51,14 @@ gyul-apply/
 1. **Hero** — 핵심 스탯 4개 카드 (누적 시청 / 하루 평균 / 연속 개근 / 채널 순위), 카운트업 애니메이션
 2. **지원 정보** — 카페·숲 아이디, 경력, 본업
 3. **활동 가능 시간대** — 평일/주말 24시간 트랙 시각화 (`#avail`, JS 생성). 가능/조건부/업무 3상태
-4. **월별 시청 리캡** — 가로 막대 차트 + 개근 스트릭 셀 (1위 달은 골드 강조)
-5. **하루 평균 시청 추이** — 인라인 SVG 라인+영역 차트 (`#trend`, JS 생성). `months`에서 `(h+min/60)/days` 계산, 최고점(26.05) 골드 강조, reveal 시 라인 드로잉 애니메이션
-6. **리캡 원본 스크린샷** — `img/` 갤러리, 클릭 시 라이트박스 확대
-7. **기타 부문** — 노래책 사이트(`.btn` "열기 ↗" 버튼, raw URL 미노출) / AI 초고속 개발 / 방송 서포트 툴 제작
-8. **지원 요약** — 담백한 한 줄 + 아이디 recap (과장/오글 문구 지양)
+4. **띵귤_ 시청 리캡** (그래프 + 증빙 통합 섹션):
+   - 월별 막대차트 — **띵귤_ 월별 시청시간**만 시각화 (`#chart`). 막대 = `transform: scaleX`, 1위인 달(26.01·26.05)은 👑 + 골드 막대, 우측에 시간·점유율 표기
+   - `sub-head` 하위: **하루 평균 시청 추이** 인라인 SVG 라인+영역 차트 (`#trend`, 띵귤 기준)
+   - `<details class="evidence">` — 리캡 원본 스크린샷 갤러리를 **접이식 증빙**으로 (기본 접힘). 원본엔 다른 채널·일별 기록이 노출되므로 필요 시에만 펼침
+5. **기타 부문** — 노래책 사이트(`.btn` "열기 ↗" 버튼, raw URL 미노출) / AI 초고속 개발 / 방송 서포트 툴 제작
+6. **지원 요약** — 담백한 한 줄 + 아이디 recap (과장/오글 문구 지양)
+
+> 지원 대상은 띵귤_ 이므로 차트는 **띵귤_ 단독**으로 표시한다. (한때 봉준 비교 막대를 넣었으나, 메시지 집중을 위해 제거.) 다른 채널 정보는 증빙 스크린샷 원본에만 존재.
 
 ## 활동 가능 시간대 로직
 
@@ -95,9 +98,22 @@ gyul-apply/
 
 ## Skills
 
-커스텀 검증 및 유지보수 스킬은 `.claude/skills/`에 정의되어 있습니다. (출처: SBKIM9704/ai-skills)
+git 워크플로 스킬이 `.claude/skills/`에 있습니다. (출처: SBKIM9704/claude-commands, `develop→main` 전략에 맞춤)
 
-| Skill | Purpose |
-|-------|---------|
-| `verify-implementation` | 프로젝트의 모든 verify 스킬을 순차 실행하여 통합 검증 보고서를 생성합니다 |
-| `manage-skills` | 세션 변경사항을 분석하고, 검증 스킬을 생성/업데이트하며, CLAUDE.md를 관리합니다 |
+| Skill | 커맨드 | Purpose |
+|-------|--------|---------|
+| `commit` | `/commit` | 변경사항을 논리 그룹별로 커밋 (`develop`/`main`이면 feature 브랜치 확인) |
+| `branch` | `/branch` | `develop` 최신화 후 feature 브랜치 생성 |
+| `pr` | `/pr` | PR 생성 → mergeable 확인 → squash merge |
+| `release` | `/release` | `develop` → `main` 릴리즈 (버전 bump · CHANGELOG · 태그) |
+
+### 디자인 · impeccable
+
+디자인 개선용 **impeccable** 스킬이 설치돼 있습니다 (출처: pbakaus/impeccable, `npx impeccable`).
+`.claude/skills/impeccable/`에 스킬·레퍼런스(30여 개)·안티패턴 detector가 있고, `/impeccable <command> [target]`으로 호출합니다.
+
+- 주요 커맨드: `/impeccable polish <파일>`(다듬기) · `audit`·`critique`(점검) · `init`(PRODUCT.md·DESIGN.md 생성) · `document`(DESIGN.md) 등
+- **PostToolUse hook** (`.claude/settings.local.json`): Edit/Write/MultiEdit 후 UI 파일을 검사해 디자인 안티패턴을 시스템 리마인더로 노출 (로컬 실행, 5초 타임아웃)
+- 수동 detector 실행: `node .claude/skills/impeccable/scripts/detect.mjs index.html`
+- 컨텍스트 파일: 루트의 `PRODUCT.md`(전략)·`DESIGN.md`(비주얼)를 impeccable이 매 작업 전 참고. `/impeccable init`으로 생성
+- 비고: node 22.12+ 권장(현재 20에서도 detector 동작 확인). 슬래시 커맨드는 설치 후 에이전트 재시작 시 로드됨
