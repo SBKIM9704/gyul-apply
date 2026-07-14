@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>띵귤_ 채팅매니저 지원서 · 좀놀던괴물</title>
-<meta name="description" content="띵귤_ 채팅매니저 지원서 — 7개월 시청 리캡 데이터 기반">
+<meta name="description" content="띵귤_ 채팅매니저 지원서 — 7개월 시청 데이터로 증명">
+<link rel="icon" type="image/png" href="img/ttingtting.png">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
@@ -66,11 +67,17 @@
     color: var(--orange-deep); font-weight: 700; letter-spacing: .01em;
     display: inline-flex; align-items: center; gap: 7px;
   }
-  .topbar .logo .dot {
-    width: 20px; height: 20px; border-radius: 7px; display: grid; place-items: center;
-    background: linear-gradient(150deg, var(--tangerine), var(--orange));
-    font-size: 12px; box-shadow: 0 3px 8px rgba(232,93,4,.35);
+  .hero-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+  .hero-mascot {
+    width: 66px; height: 66px; object-fit: contain; display: block; flex: none;
+    filter: drop-shadow(0 8px 14px rgba(232,93,4,.28));
+    animation: bob 3.4s ease-in-out infinite;
   }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(-2.5deg); }
+    50% { transform: translateY(-8px) rotate(2.5deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .hero-mascot { animation: none; } }
 
   /* ── hero ── */
   .hero { padding: 40px 0 30px; position: relative; }
@@ -78,7 +85,7 @@
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 13px; color: var(--orange-deep); font-weight: 700;
     border: 1px solid var(--line-strong); border-radius: 999px;
-    padding: 6px 15px; margin-bottom: 22px;
+    padding: 6px 15px;
     background: rgba(255,255,255,.7); box-shadow: var(--shadow-sm);
   }
   .hero h1 {
@@ -120,7 +127,10 @@
   section + section { border-top: 1px dashed var(--line-strong); }
   .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
   .sec-head h2 { font-size: 22px; }
-  .sec-head .tag {
+  .sub-head { display: flex; align-items: baseline; gap: 10px; margin: 30px 0 16px; flex-wrap: wrap; }
+  .sub-head h3 { font-size: 17px; }
+  .sec-lead { color: var(--ink-soft); font-size: 15px; max-width: 640px; margin: -10px 0 22px; line-height: 1.6; }
+  .sec-head .tag, .sub-head .tag {
     font-size: 12px; color: var(--orange-deep); font-weight: 600;
     background: var(--bg-tint); border-radius: 999px; padding: 3px 11px;
   }
@@ -180,30 +190,25 @@
     background: var(--surface); border: 1px solid var(--line);
     border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow);
   }
-  .row {
-    display: grid; grid-template-columns: 56px 1fr; gap: 14px;
-    align-items: center; padding: 9px 0;
-  }
-  .row .month { font-size: 13px; color: var(--ink-soft); font-weight: 700; text-align: right; }
-  .bar-track { position: relative; height: 36px; background: var(--surface-2); border-radius: 9px; }
+  /* 범례 */
+  .clegend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 16px; font-size: 12.5px; align-items: center; }
+  .clegend .crown-note { color: var(--muted); }
+  /* 월별 시청 막대 (띵귤_) */
+  .srow { display: grid; grid-template-columns: 48px 1fr 120px; gap: 12px; align-items: center; padding: 10px 0; }
+  .srow + .srow { border-top: 1px dashed var(--line); }
+  .srow .month { font-size: 13px; color: var(--ink-soft); font-weight: 700; text-align: right; }
+  .srow .month .crown { margin-left: 3px; }
+  .bar-track { position: relative; height: 30px; background: var(--surface-2); border-radius: 8px; overflow: hidden; }
   .bar {
-    height: 100%; border-radius: 9px; width: 0;
+    height: 100%; border-radius: 8px; width: 100%;
+    transform: scaleX(0); transform-origin: left center;
     background: linear-gradient(90deg, var(--tangerine), var(--orange));
-    transition: width 1.1s cubic-bezier(.22,.9,.3,1);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+    transition: transform 1.1s cubic-bezier(.22,.9,.3,1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
   }
-  .row.rank1 .bar { background: linear-gradient(90deg, #ffcf4d, var(--gold)); }
-  .bar-meta {
-    position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-    display: flex; align-items: center; gap: 10px; padding-right: 4px;
-  }
-  .badge {
-    font-size: 11px; font-weight: 700; border-radius: 7px; padding: 3px 9px;
-    background: rgba(255,255,255,.85); color: var(--orange-deep); border: 1px solid var(--line-strong);
-  }
-  .row.rank1 .badge { background: #fff5d6; color: var(--gold); border-color: #f2d98a; }
-  .hours { font-size: 14px; font-weight: 700; white-space: nowrap; color: var(--ink); }
-  .hours small { font-weight: 500; color: var(--muted); font-size: 11px; }
+  .srow.rank1 .bar { background: linear-gradient(90deg, #ffcf4d, var(--gold)); }
+  .gh { font-size: 13px; font-weight: 700; white-space: nowrap; color: var(--ink); text-align: right; }
+  .gh small { font-weight: 500; color: var(--muted); font-size: 10.5px; }
   .chart-foot {
     margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line-strong);
     font-size: 13px; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 8px 20px;
@@ -286,6 +291,20 @@
   }
   .proof-hint { font-size: 12.5px; color: var(--muted); margin-top: 12px; }
 
+  /* ── 접이식 증빙 ── */
+  .evidence { margin-top: 22px; border-top: 1px dashed var(--line-strong); padding-top: 18px; }
+  .evidence > summary {
+    cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13.5px; font-weight: 700; color: var(--orange-deep);
+    background: var(--bg-tint); border: 1px solid var(--line-strong); border-radius: 999px;
+    padding: 8px 16px; transition: background .15s ease; user-select: none;
+  }
+  .evidence > summary::-webkit-details-marker { display: none; }
+  .evidence > summary::after { content: '▾'; font-size: 12px; transition: transform .2s ease; }
+  .evidence[open] > summary::after { transform: rotate(180deg); }
+  .evidence > summary:hover { background: #ffe6cc; }
+  .evidence .proof-grid { margin-top: 16px; }
+
   .lightbox {
     position: fixed; inset: 0; z-index: 50; display: none;
     background: rgba(44,33,24,.6); backdrop-filter: blur(6px);
@@ -348,9 +367,11 @@
   }
   @media (max-width: 640px) {
     .hero { padding: 28px 0 24px; }
+    .hero-mascot { width: 56px; height: 56px; }
     .info-grid { grid-template-columns: 1fr; }
-    .row { grid-template-columns: 44px 1fr; gap: 10px; }
-    .hours small { display: none; }
+    .srow { grid-template-columns: 40px 1fr 84px; gap: 8px; }
+    .gh { font-size: 11.5px; }
+    .gh small { display: none; }
     .proof-grid { grid-template-columns: repeat(2, 1fr); }
     .avail-row { grid-template-columns: 50px 1fr; gap: 10px; }
     .hour-axis { margin-left: 64px; }
@@ -359,18 +380,22 @@
 </style>
 </head>
 <body>
+<!-- impeccable-disable numbered-section-markers -- "25.12"/"26.01" 등은 날짜·월 라벨이지 섹션 마커가 아님 -->
 
 <div class="wrap">
   <div class="topbar">
-    <span class="logo display"><span class="dot">🍊</span>띵귤_ 채팅매니저 지원서</span>
+    <span class="logo display">띵귤_ 채팅매니저 지원서</span>
     <span>2026.07</span>
   </div>
 
   <!-- HERO -->
   <header class="hero">
-    <span class="eyebrow">🍊 좀놀던괴물 · 채팅매니저 지원</span>
+    <div class="hero-head">
+      <img class="hero-mascot" src="img/ttingtting.png" alt="띵띵이">
+      <span class="eyebrow">지원자 · 좀놀던괴물</span>
+    </div>
     <h1 class="display">숫자로 증명하는<br><span class="hl">띵귤 라이브 시청 기록</span></h1>
-    <p class="sub">SOOP 월별 리캡 기준 최근 7개월치 시청 데이터를 그대로 옮겼습니다. "자주 시청하시는 분"이라는 지원 조건, 데이터로 답합니다.</p>
+    <p class="sub">"자주 시청하시는 분"이라는 지원 조건, 최근 7개월 시청 데이터로 답합니다. 나아가 개발로 방송을 더 풍부하게 만드는 데 보태고 싶습니다.</p>
 
     <div class="hero-stats">
       <div class="stat reveal">
@@ -380,7 +405,7 @@
       <div class="stat reveal">
         <div class="label">하루 평균 시청</div>
         <div class="value display">약 <span data-count="4">0</span><span class="u">시간</span></div>
-        <div class="sub">최고 26.05 · 5.5시간/일</div>
+        <div class="sub">접속한 날 기준</div>
       </div>
       <div class="stat leaf reveal">
         <div class="label">연속 개근</div>
@@ -414,7 +439,7 @@
       <div class="info-card reveal">
         <div class="k">본업</div>
         <div class="v">웹 풀스택 개발자</div>
-        <div class="note">AI를 활용해 방송에 필요한 페이지·도구를 빠르게 만들 수 있습니다.</div>
+        <div class="note">개발로 기여할 수 있는 부분은 아래 기타 부문에 정리했습니다.</div>
       </div>
     </div>
   </section>
@@ -434,42 +459,46 @@
     </div>
   </section>
 
-  <!-- 시청 리캡 -->
+  <!-- 시청 리캡 (그래프 + 증빙 통합) -->
   <section>
-    <div class="sec-head"><h2 class="display">띵귤_ 월별 시청 리캡</h2><span class="tag">SOOP 월별 리캡 기준</span></div>
+    <div class="sec-head"><h2 class="display">띵귤_ 시청 리캡</h2><span class="tag">SOOP 월별 리캡 기준</span></div>
+
+    <!-- 월별 띵귤_ 시청량 -->
     <div class="chart-card reveal">
+      <div class="clegend">
+        <span class="crown-note">막대 = 월별 띵귤_ 시청시간 · 👑 해당 월 내 시청 1위</span>
+      </div>
       <div id="chart"></div>
       <div class="chart-foot">
         <span>누적 <b>783시간 48분</b></span>
-        <span>최고 기록 <b>26.05 · 169시간 8분</b></span>
-        <span>1위 달성 <b>26.01 / 26.05</b></span>
+        <span>내 전체 시청의 <b>약 20~31%</b>가 띵귤_</span>
+        <span>1위 달성 <b>26.01 · 26.05</b></span>
       </div>
       <div class="streak" id="streak"></div>
     </div>
-  </section>
 
-  <!-- 하루 평균 시청 추이 -->
-  <section>
-    <div class="sec-head"><h2 class="display">하루 평균 시청 추이</h2><span class="tag">우상향 📈</span></div>
+    <!-- 하루 평균 시청 추이 -->
+    <div class="sub-head"><h3 class="display">하루 평균 시청 추이</h3><span class="tag">띵귤_ · 우상향 📈</span></div>
     <div class="chart-card trend-card reveal">
       <div id="trend"></div>
       <div class="chart-foot">
-        <span>월별 하루 평균 시청시간 (해당 월 접속일 기준)</span>
+        <span>해당 월 접속일 기준 하루 평균</span>
         <span>최고 <b>26.05 · 하루 5.5시간</b></span>
       </div>
     </div>
-  </section>
 
-  <!-- 증빙 스크린샷 -->
-  <section>
-    <div class="sec-head"><h2 class="display">리캡 원본 스크린샷</h2><span class="tag">클릭하면 크게 보기</span></div>
-    <div class="proof-grid" id="proofGrid"></div>
-    <p class="proof-hint">SOOP 월별 리캡 화면을 그대로 캡처한 원본입니다. 위 차트의 수치는 전부 여기서 나왔습니다.</p>
+    <!-- 원본 스크린샷 (접이식 증빙) -->
+    <details class="evidence">
+      <summary>📁 리캡 원본 스크린샷 보기 (증빙)</summary>
+      <div class="proof-grid" id="proofGrid"></div>
+      <p class="proof-hint">위 그래프 수치의 출처인 원본 캡처입니다. 다른 채널·일별 기록도 함께 담겨 평소엔 접어 둡니다.</p>
+    </details>
   </section>
 
   <!-- 기타 부문 -->
   <section>
-    <div class="sec-head"><h2 class="display">기타 부문 · 이런 것도 합니다</h2><span class="tag">웹 풀스택 개발자</span></div>
+    <div class="sec-head"><h2 class="display">기타 부문 · 이런 것도 합니다</h2><span class="tag">개발로 서포트</span></div>
+    <p class="sec-lead">채팅 관리는 기본이고, 방송에 필요한 것들을 개발로 직접 만들어 보탤 수 있습니다.</p>
     <div class="skill-list">
       <div class="skill reveal">
         <div class="ico">🎵</div>
@@ -483,7 +512,7 @@
         <div class="ico">⚡</div>
         <div>
           <h3>AI 활용 초고속 웹 개발</h3>
-          <p>웹 풀스택 개발자로 일하고 있고, AI를 적극 활용해 웹 페이지나 크롬 익스텐션을 빠르게 만듭니다. 방송에 필요한 페이지·위젯·도구, 아이디어만 주시면 만들어 옵니다.</p>
+          <p>AI를 적극 활용해 웹 페이지·크롬 익스텐션을 빠르게 만듭니다. 방송에 필요한 페이지·위젯·도구, 아이디어만 주시면 만들어 옵니다.</p>
         </div>
       </div>
       <div class="skill reveal">
@@ -499,7 +528,7 @@
   <!-- 지원 요약 -->
   <section>
     <div class="summary reveal">
-      <div class="line">채팅매니저 경력은 없지만, 방송은 매일 보고 있고 개발로 보탤 부분도 많습니다.</div>
+      <div class="line">매일 방송을 챙겨 보고 있고, 채팅 관리와 개발 양쪽으로 함께하고 싶습니다.</div>
       <div class="ids">
         <div><div class="k">카페 · 숲</div><div class="mono">mar5924</div></div>
       </div>
@@ -511,32 +540,30 @@
 
 <script>
   // ── 시청 데이터 ──
+  // h/min = 띵귤_ 시청, pct = 내 전체 시청 중 띵귤_ 비중, rank = 띵귤_의 해당 월 내 시청 순위
   const months = [
     { m: '25.12', h: 57,  min: 6,  pct: 28.1, rank: 2, days: 15, full: false },
-    { m: '26.01', h: 99,  min: 26, pct: 22.4, rank: 1, days: 31, full: true },
-    { m: '26.02', h: 95,  min: 2,  pct: 22.6, rank: 2, days: 28, full: true },
-    { m: '26.03', h: 129, min: 23, pct: 31.0, rank: 2, days: 31, full: true },
-    { m: '26.04', h: 109, min: 53, pct: 23.1, rank: 2, days: 30, full: true },
-    { m: '26.05', h: 169, min: 8,  pct: 19.8, rank: 1, days: 31, full: true },
-    { m: '26.06', h: 123, min: 50, pct: 19.7, rank: 2, days: 30, full: true },
+    { m: '26.01', h: 99,  min: 26, pct: 22.4, rank: 1, days: 31, full: true  },
+    { m: '26.02', h: 95,  min: 2,  pct: 22.6, rank: 2, days: 28, full: true  },
+    { m: '26.03', h: 129, min: 23, pct: 31.0, rank: 2, days: 31, full: true  },
+    { m: '26.04', h: 109, min: 53, pct: 23.1, rank: 2, days: 30, full: true  },
+    { m: '26.05', h: 169, min: 8,  pct: 19.8, rank: 1, days: 31, full: true  },
+    { m: '26.06', h: 123, min: 50, pct: 19.7, rank: 2, days: 30, full: true  },
   ];
-  const max = Math.max(...months.map(d => d.h + d.min / 60));
+  const hrs = (h, m) => h + m / 60;
+  const max = Math.max(...months.map(d => hrs(d.h, d.min)));
 
-  // ── 차트 렌더 ──
+  // ── 차트 렌더 (띵귤_ 월별 시청) ──
   const chart = document.getElementById('chart');
   months.forEach(d => {
-    const w = ((d.h + d.min / 60) / max * 100).toFixed(1);
+    const w = (hrs(d.h, d.min) / max * 100).toFixed(1);
+    const crown = d.rank === 1 ? '<span class="crown">👑</span>' : '';
     const row = document.createElement('div');
-    row.className = 'row' + (d.rank === 1 ? ' rank1' : '');
+    row.className = 'srow' + (d.rank === 1 ? ' rank1' : '');
     row.innerHTML = `
-      <div class="month">${d.m}</div>
-      <div class="bar-track">
-        <div class="bar" data-w="${w}"></div>
-        <div class="bar-meta">
-          <span class="hours">${d.h}시간 ${d.min}분 <small>· 내 시청의 ${d.pct}%</small></span>
-          <span class="badge">${d.rank}위</span>
-        </div>
-      </div>`;
+      <div class="month">${d.m}${crown}</div>
+      <div class="bar-track"><div class="bar" data-w="${w}"></div></div>
+      <span class="gh">${d.h}시간 ${d.min}분 <small>· ${d.pct}%</small></span>`;
     chart.appendChild(row);
   });
 
@@ -634,7 +661,7 @@
 
   const lb = document.createElement('div');
   lb.className = 'lightbox';
-  lb.innerHTML = `<button class="lb-close" aria-label="닫기">✕</button><img alt="">`;
+  lb.innerHTML = `<button class="lb-close" aria-label="닫기">✕</button><img alt="">`; // impeccable-disable-line broken-image -- 라이트박스 자리표시자, 열 때 src 주입
   document.body.appendChild(lb);
   const lbImg = lb.querySelector('img');
   function openLb(src, label) {
@@ -658,7 +685,7 @@
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     e.target.classList.add('on');
-    e.target.querySelectorAll('.bar').forEach(b => b.style.width = b.dataset.w + '%');
+    e.target.querySelectorAll('.bar').forEach(b => b.style.transform = 'scaleX(' + (b.dataset.w / 100) + ')');
     e.target.querySelectorAll('.trend .line').forEach(l => l.style.strokeDashoffset = '0');
     io.unobserve(e.target);
   }), { threshold: 0.15 });

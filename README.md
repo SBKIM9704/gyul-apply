@@ -46,12 +46,29 @@ git push -u origin main
 
 ```
 gyul-apply/
-├── index.html     # 페이지 전체 (HTML/CSS/JS 인라인)
-├── img/           # SOOP 월별 리캡 원본 스크린샷 (증빙)
-├── .nojekyll      # GitHub Pages용
+├── index.html          # 페이지 전체 (HTML/CSS/JS 인라인)
+├── img/                # 리캡 원본 스크린샷(증빙) + ttingtting.png(마스코트)
+├── .nojekyll           # GitHub Pages용
+├── .claude/skills/     # git 워크플로 스킬(commit·branch·pr·release) + impeccable(디자인)
+├── PRODUCT.md          # (impeccable) 제품/브랜드 전략 컨텍스트
+├── DESIGN.md           # (impeccable) 비주얼 시스템 컨텍스트
 ├── README.md
-└── CLAUDE.md      # 프로젝트 컨텍스트 / 작업 가이드
+└── CLAUDE.md           # 프로젝트 컨텍스트 / 작업 가이드
 ```
+
+## 디자인 도구 · impeccable
+
+디자인 개선을 위해 [impeccable](https://impeccable.style) 스킬을 설치했습니다 (`.claude/skills/impeccable/`).
+
+```bash
+# 안티패턴 detector 직접 실행
+node .claude/skills/impeccable/scripts/detect.mjs index.html
+```
+
+- 에이전트에서 `/impeccable polish index.html`, `/impeccable audit` 등으로 디자인을 다듬을 수 있습니다.
+- `/impeccable init`이 루트에 `PRODUCT.md`(전략)·`DESIGN.md`(비주얼)를 만들고, 이후 모든 커맨드가 이를 참고합니다.
+- Edit/Write 시 UI 안티패턴을 자동 점검하는 hook이 `.claude/settings.local.json`에 등록돼 있습니다.
+- 슬래시 커맨드는 설치 후 에이전트 재시작 시 로드됩니다. (node 22.12+ 권장)
 
 ## 데이터 수정
 
