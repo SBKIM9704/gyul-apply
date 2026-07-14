@@ -99,6 +99,7 @@
     background: var(--bg-tint); padding: 2px 9px; border-radius: 7px;
   }
   .info-card .note { font-size: 12.5px; color: var(--ink-soft); margin-top: 7px; line-height: 1.55; }
+  .info-card.wide { grid-column: 1 / -1; }
 
   /* ── 활동 가능 시간대 ── */
   .avail-card {
@@ -291,6 +292,7 @@
   }
   .skill h3 { font-size: 15.5px; margin-bottom: 4px; }
   .skill p { font-size: 14px; color: var(--ink-soft); }
+  .skill p + p { margin-top: .7em; }
   .skill a:not(.btn) { color: var(--orange-deep); text-decoration: none; font-weight: 600; border-bottom: 1.5px solid var(--line-strong); }
   .skill a:not(.btn):hover { border-bottom-color: var(--orange); }
 
@@ -368,15 +370,10 @@
         </span>
         <span class="copy-hint" aria-live="polite"><span class="copy-ico" aria-hidden="true">⧉</span> 복사</span>
       </button>
-      <div class="info-card reveal">
+      <div class="info-card wide reveal">
         <div class="k">채팅매니저 경력</div>
         <div class="v">없음</div>
-        <div class="note">경력은 없지만 아래 시청 데이터와 개발 역량으로 대신하겠습니다.</div>
-      </div>
-      <div class="info-card reveal">
-        <div class="k">본업</div>
-        <div class="v">웹 풀스택 개발자</div>
-        <div class="note">개발로 기여할 수 있는 부분은 아래 기타 부문에 정리했습니다.</div>
+        <div class="note">경력은 없지만, 아래 시청 데이터로 대신하겠습니다.</div>
       </div>
     </div>
   </section>
@@ -419,29 +416,16 @@
 
   <!-- 기타 부문 -->
   <section>
-    <div class="sec-head"><h2 class="display">기타 부문 · 이런 것도 합니다</h2><span class="tag">개발로 서포트</span></div>
-    <p class="sec-lead">채팅 관리는 기본이고, 방송에 필요한 것들을 개발로 직접 만들어 보탤 수 있습니다.</p>
+    <div class="sec-head"><h2 class="display">기타 부문</h2><span class="tag">개발로 서포트</span></div>
+    <p class="sec-lead">채팅 관리 외에, 개발로도 조용히 보탬이 되고 싶습니다.</p>
     <div class="skill-list">
-      <div class="skill reveal">
-        <div class="ico">🎵</div>
-        <div>
-          <h3>노래책 사이트 — 직접 만들어 운영 중</h3>
-          <p>시간 날 때마다 업데이트하고 있는 띵귤 노래책 사이트입니다. 말보다 결과물이 빠를 것 같아, 직접 보시는 걸 추천드립니다.</p>
-          <a class="btn" href="https://singgyulsingbook.vercel.app/" target="_blank" rel="noopener">노래책 사이트 열기 <span class="arrow">↗</span></a>
-        </div>
-      </div>
-      <div class="skill reveal">
-        <div class="ico">⚡</div>
-        <div>
-          <h3>AI 활용 초고속 웹 개발</h3>
-          <p>AI를 적극 활용해 웹 페이지·크롬 익스텐션을 빠르게 만듭니다. 방송에 필요한 페이지·위젯·도구, 아이디어만 주시면 만들어 옵니다.</p>
-        </div>
-      </div>
       <div class="skill reveal">
         <div class="ico">🛠️</div>
         <div>
-          <h3>방송 서포트 툴 제작</h3>
-          <p>투표·이벤트 페이지, 채팅 도우미 익스텐션, 오버레이, 기록 정리 자동화 등을 개발로 지원할 수 있습니다. 이 지원서 페이지도 그 예시 중 하나입니다.</p>
+          <h3>간단하고 반복적인 일은 개발로 덜어 드리고 싶습니다</h3>
+          <p>본업이 웹 개발자이다 보니, 방송에서 생기는 간단하고 반복적인 일은 개발로 해소해 도움을 드릴 수 있습니다.</p>
+          <p>아래 노래책 사이트는 예전에 도움이 될까 싶어 만들었다가, 너무 나서는 것 같아 묵혀 둔 사이트입니다. 참고만 부탁드립니다.</p>
+          <a class="btn" href="https://singgyulsingbook.vercel.app/" target="_blank" rel="noopener">노래책 사이트 (참고용) <span class="arrow">↗</span></a>
         </div>
       </div>
     </div>
@@ -458,7 +442,7 @@
         <span class="li"><span class="sw cond"></span> 업무 전날 · 새벽 2시까지</span>
         <span class="li"><span class="sw work"></span> 업무 시간(활동 어려움)</span>
       </div>
-      <p class="avail-note">평일 <b>09:00~20:00</b>은 업무 시간이라 활발한 활동이 어렵습니다. <b>업무 전날</b>은 <b>새벽 2시</b>까지 활동 가능하고, 그 외 저녁·주말은 대부분 함께할 수 있습니다.</p>
+      <p class="avail-note">평일 <b>07:00~20:00</b>은 업무 및 출퇴근 시간이라 활발한 활동이 어렵습니다.<br><b>업무 전날</b>은 <b>새벽 2시</b>까지 활동 가능하고, 그 외 저녁·주말은 대부분 문제 없습니다.</p>
     </div>
   </section>
 
@@ -558,9 +542,9 @@
   // state(hour) → 'avail' | 'cond' | 'work' | ''(휴식/취침)
   function weekdayState(h) {
     if (h === 0 || h === 1) return 'cond';   // 00~02 업무 전날 · 새벽 2시까지
-    if (h >= 9 && h <= 19) return 'work';     // 09~20 업무
+    if (h >= 7 && h <= 19) return 'work';     // 07~20 업무 및 출퇴근
     if (h >= 20) return 'avail';              // 20~24 활동 가능
-    return '';                                // 02~09 휴식/취침
+    return '';                                // 02~07 휴식/취침
   }
   function weekendState(h) {
     if (h >= 2 && h <= 8) return '';          // 취침/오전
